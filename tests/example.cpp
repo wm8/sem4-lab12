@@ -8,7 +8,7 @@
 #include <example.hpp>
 
 TEST(Example, EmptyTest) {
-    EXPECT_THROW(example(), std::runtime_error);
+    EXPECT_NO_THROW(Log{1});
 }
 
 TEST(DISABLED_Snapshot, Speen) {
