@@ -1,7 +1,7 @@
 // Copyright 2022 wm8
 
 #include "UsedMemory.h"
-
+#include <string>
 UsedMemory::UsedMemory(const Log& log) : log_(&log) {}
 
 void UsedMemory::OnDataLoad(const std::vector<Item>& old_items,

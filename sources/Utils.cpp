@@ -28,8 +28,8 @@ bool ParseArgs(Data* data, int argc, char **argv) {
       data->threshold = map["threshold"].as<float>();
     else
       data->threshold = 0.1;
-    if(map.count("input"))
-    data->inp_path = map["input"].as<std::string>();
+    if (map.count("input"))
+      data->inp_path = map["input"].as<std::string>();
     else
       data->inp_path = "../media/data,txt";
   } catch (std::exception& e) {

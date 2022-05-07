@@ -4,7 +4,7 @@
 void Histogram::AddItemScore(float score) {
   count++;
   sum += score;
-  mean = score / (float)count;
+  mean = score / static_cast<float>(count);
 }
 void Histogram::Clear() {
   /*sum = 0;

@@ -1,6 +1,9 @@
 // Copyright 2022 wm8
 #include "PageContainer.h"
-
+#include <vector>
+#include <set>
+#include <string>
+#include <utility>
 std::vector<Item> PageContainer::GetAll() { return data_; }
 
 void PageContainer::Load(std::istream& io, float threshold) {
@@ -37,7 +40,6 @@ void PageContainer::Load(std::istream& io, float threshold) {
       data.push_back(std::move(item));
     } else {
       stat_sender_->Skip(item);
-
     }
   }
 
@@ -95,7 +97,8 @@ PageContainer::PageContainer(StatSender* stat, UsedMemory* memory_counter) {
 }
 PageContainer::PageContainer(const Log& log, UsedMemory* memory_counter,
                              Histogram* h)
-    : log_(&log), histogram_(h), memory_counter_(memory_counter), stat_sender_( new StatSender(*log_)) {}
+    : log_(&log), histogram_(h), memory_counter_(memory_counter),
+      stat_sender_( new StatSender(*log_)) {}
 
 PageContainer::~PageContainer() {
   //delete memory_counter_;
