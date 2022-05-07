@@ -1,22 +1,24 @@
-#include <example.hpp>
-
+#include <Utils.hpp>
 #include <string>
 
 int main(int argc, char* argv[]) {
   Log the_log(0);
   UsedMemory used_memory(the_log);
 
-  std::string filename = "data.txt";
-  for (int i = 1; i < argc; ++i) {
-    if (std::string(argv[i]) == "input") {
-      filename = argv[i + 1];
-    }
+  Data* data = new Data();
+  if(!ParseArgs(data, argc, argv)) {
+    delete data;
+    return -1;
+  }
+  PageContainer page(the_log, &used_memory);
+  std::ifstream in(data->inp_path);
+  if(!in)
+  {
+    std::cout << "File doesn't exist";
+    return -1;
   }
 
-  float threshold = 0.1;
-  PageContainer page(the_log, &used_memory);
-  std::ifstream in(filename);
-  page.Load(in, threshold);
+  page.Load(in, data->threshold);
 
   the_log.Write(std::to_string(used_memory.used()));
 
@@ -26,9 +28,8 @@ int main(int argc, char* argv[]) {
     const auto& item2 = page.ById(std::to_string(i));
     std::cout << item2.name << ": " << item2.score << std::endl;
   }
-
-  page.Reload(threshold);
+  page.Reload(data->threshold);
   the_log.Write(std::to_string(used_memory.used()));
-
+  delete data;
   return 0;
 }
