@@ -102,6 +102,7 @@ PageContainer::PageContainer(const Log& log, UsedMemory* memory_counter,
       stat_sender_( new StatSender(*log_)) {}
 
 PageContainer::~PageContainer() {
-  //delete memory_counter_;
-  //delete stat_sender_;
+  delete memory_counter_;
+  delete stat_sender_;
+  delete histogram_;
 }
