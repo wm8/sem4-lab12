@@ -94,6 +94,7 @@ PageContainer::PageContainer(StatSender* stat, UsedMemory* memory_counter) {
   this->memory_counter_ = memory_counter;
   stat_sender_ = stat;
   log_ = stat->getLog();
+  histogram_ = new Histogram();
 }
 PageContainer::PageContainer(const Log& log, UsedMemory* memory_counter,
                              Histogram* h)
